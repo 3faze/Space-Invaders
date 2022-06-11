@@ -1,3 +1,4 @@
+```
 import pygame
 import time
 import random
@@ -34,3 +35,4 @@ def main():
             if event.type == pygame.KEYDOWN:
                 if event.key == pygame.K_a:
                     
+```

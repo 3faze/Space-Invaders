@@ -8,13 +8,18 @@ white = (255, 255, 255)
 blue = (0, 0, 125)
 black = (0, 0, 0)
 red = (255, 0, 0)
+yellow = (255, 179, 0)
 
-dis = pygame.display.set_mode((800, 600))
+dis_height = 600
+dis_width = 800
+
+dis = pygame.display.set_mode((dis_width, dis_height))
 pygame.display.set_caption('Space Invaders')
+font_style = pygame.font.SysFont(None, 100)
 
 cooldown = 2
 
-game_over = False
+game_finished = False
  
 x1 = 800 / 2
 y1 = 600 / 2
@@ -30,7 +35,11 @@ y1_change = 0
 
 clock = pygame.time.Clock()
 
-while not game_over:
+def message_render(msg, color):
+    mesg = font_style.render(msg, True, color)
+    dis.blit(mesg, [dis_width / 2 - 150, dis_height / 2 - 50])
+
+while not game_finished:
     for event in pygame.event.get():
         if event.type == pygame.QUIT:
             game_over = True
@@ -80,10 +89,9 @@ while not game_over:
         print("Target Shot.")
         yb = y1 - 30
         xb = x1
-        y1e = 1000
-        x1e = 1000
+        y1, x1, x1e, y1e = 1000, 1000, 1000, 1000
         print("Game Won.")
-        game_over = True
+        game_finished = True
     dis.fill(blue)
     pygame.draw.rect(dis, white, [x1, y1, 30, 30])
     pygame.draw.rect(dis, black, [x1e, y1e, 30, 30])
@@ -91,8 +99,11 @@ while not game_over:
     pygame.display.update()
  
     clock.tick(30)
+
+message_render("You Won!", yellow)
+pygame.display.update()
+time.sleep(4)
  
 pygame.quit()
-quit()
-                
+quit()        
 ```
